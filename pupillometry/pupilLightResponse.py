@@ -131,19 +131,19 @@ class PupilLightResponse:
             plt.show()
         return ax
 
-    def plot_coefficients(
-        self,
-        formula: function,
-        coefficients: tuple[float],
-        show=True,
-        ax=None,
-        **kwargs,
-    ):
-        if ax is None:
-            import matplotlib.pyplot as plt
+    # def plot_coefficients(
+    #     self,
+    #     formula: function,
+    #     coefficients: tuple[float],
+    #     show=True,
+    #     ax=None,
+    #     **kwargs,
+    # ):
+    #     if ax is None:
+    #         import matplotlib.pyplot as plt
 
-            fig, ax = plt.subplots()
-        ax.plot(self.time, formula(self.time, *coefficients), **kwargs)
-        ax.set_xlabel("Time (s)")
-        ax.set_ylabel("Pupil size")
-        return ax
+    #         fig, ax = plt.subplots()
+    #     ax.plot(self.time, formula(self.time, *coefficients), **kwargs)
+    #     ax.set_xlabel("Time (s)")
+    #     ax.set_ylabel("Pupil size")
+    #     return ax
