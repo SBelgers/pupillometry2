@@ -124,7 +124,7 @@ class PupilLightResponse:
             import matplotlib.pyplot as plt
 
             fig, ax = plt.subplots()
-        ax.plot(self.time, self.size, **kwargs)
+        ax.scatter(self.time, self.size, **kwargs)
         ax.set_xlabel("Time (s)")
         ax.set_ylabel("Pupil size")
         if show:
