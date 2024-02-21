@@ -58,11 +58,14 @@ class PupilLightResponse:
     def get_stimuli_start(self) -> float:
         return self.stimuli_start
 
-    def get_t_max_constriction(self) -> float:
-        time, size = self.select_subsection(
-            self.get_stimuli_start(), self.get_stimuli_end()
-        )
-        return time[size.argmin()]
+    def get_t_max_constriction(self, stimuli_only: bool = True) -> float:
+        if not stimuli_only:
+            return self.get_time()[self.get_size().argmin()]
+        else:
+            time, size = self.select_subsection(
+                self.get_stimuli_start(), self.get_stimuli_end()
+            )
+            return time[size.argmin()]
 
     def get_stimuli_end(self) -> float:
         return self.stimuli_end
