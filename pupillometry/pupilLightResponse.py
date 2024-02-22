@@ -128,12 +128,26 @@ class PupilLightResponse:
         indices = np.where((self.time >= start_t) & (self.time <= end_t))
         return self.get_time()[indices], self.get_size()[indices]
 
-    def plot(self, show=True, ax=None, **kwargs):
+    def plot(
+        self,
+        include_t_max_constriction: bool = True,
+        include_stimuli: bool = True,
+        show: bool = True,
+        ax=None,
+        **kwargs,
+    ):
         if ax is None:
             import matplotlib.pyplot as plt
 
             fig, ax = plt.subplots()
         ax.scatter(self.time, self.size, **kwargs)
+        if include_t_max_constriction:
+            ax.axvline(
+                self.get_t_max_constriction(), color="red", linestyle="--"
+            )
+        if include_stimuli:
+            ax.axvline(self.get_stimuli_start(), color="green", linestyle="--")
+            ax.axvline(self.get_stimuli_end(), color="green", linestyle="--")
         ax.set_xlabel("Time (s)")
         ax.set_ylabel("Pupil size")
         if show:
