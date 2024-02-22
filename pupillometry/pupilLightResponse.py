@@ -59,9 +59,10 @@ class PupilLightResponse:
         return self.stimuli_start
 
     def get_t_max_constriction(self, stimuli_only: bool = True) -> float:
+        # Todo: add testing for nan_policy="omit"
         # TODO add check on get_stimuli_start is None
         if not stimuli_only:
-            return self.get_time()[self.get_size().argmin(nan_policy="omit")]
+            return self.get_time()[np.nanargmin(self.get_size())]
         else:
             stimuli_start = self.get_stimuli_start()
             if stimuli_start is None:
@@ -70,7 +71,7 @@ class PupilLightResponse:
             if stimuli_end is None:
                 raise ValueError("Stimuli end is not defined")
             time, size = self.select_subsection(stimuli_start, stimuli_end)
-            return time[size.argmin(nan_policy="omit")]
+            return time[np.nanargmin(size)]
 
     def get_stimuli_end(self) -> float:
         return self.stimuli_end
